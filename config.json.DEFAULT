@@ -11,5 +11,6 @@
     "path_to_peer_review_src": "",
     "path_to_peer_review_dest": "",
     "path_to_repo_mappings": "",
-    "path_to_peer_review_mappings": ""
+    "path_to_peer_review_mappings": "",
+    "collaborator_permission": ""
 }
