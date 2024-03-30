@@ -1,4 +1,4 @@
-# Assignment Manipulators
+# GitHub Classroom Assignment Repo Manipulators
 
 Copyright (c) 2023-2024 Jared Daniel Recomendable.
 
