@@ -22,6 +22,76 @@ pip3 install pathos requests
 See Developer setttings on GitHub to obtain your API key.  Be sure to include `administration:write` permissions.
 
 
+## Workflow
+
+The following shows which script(s) to run and in what order (if applicable) depending on the context.
+
+### Cloning Assignment Repos
+
+* Run `assignment_repo_cloner.py`, modifying the following configuration values in `config.json`:
+    * `github_api_key`
+    * `github_org`
+    * `assignment_prefix`
+    * `assignment_date_filter`
+    * `path_to_clone_assignment_repos`
+
+### Granting or Restricting Access to Student Repos
+
+* Run `code_owner_permissions_modifier.py`, modifying the following configuration values in `config.json`:
+    * `github_api_key`
+    * `github_org`
+    * `assignment_prefix`
+    * `path_to_repo_mappings`
+    * `collaborator_permission`
+
+### Making Bulk Changes to Student Repos
+
+* Copy `git_actions_runner.sh` to the directory containing the student repos, then adapt the script accordingly.
+* Remember to set execute permissions prior to running.
+
+### Assigning Peer Reviews
+
+Do this prior to the start of a peer review assignment.
+
+1. Run `peer_review_group_creator.py`, modifying the following configuration values in `config.json`:
+    * `github_api_key`
+    * `github_classroom_assignment_id`
+    * `path_to_github_classroom_roster`
+    * `peer_count`
+    * `peer_assignment_interval`
+    * `path_to_repo_mappings`
+    * `path_to_peer_review_mappings`
+2. Next, run `peer_review_repo_access.py`, passing in `add` as the argument and modifying the following configuration values in `config.json`:
+    * `github_api_key`
+    * `path_to_repo_mappings`
+    * `path_to_peer_review_mappings`
+
+### Distributing Peer Reviews
+
+Do this when a peer review assignment has concluded, and to pass on peer reviews to the target recipients.
+
+1. Block out existing peer reviewers from accessing their peers' repos by running `peer_review_repo_access.py`, passing in `remove` as the argument and modifying the following configuration values in `config.json`:
+    * `github_api_key`
+    * `path_to_repo_mappings`
+    * `path_to_peer_review_mappings`
+2. Next, inspect directories for any improperly-formatted Markdown files, or Markdown files that do not follow the naming convention of `{target_recipient_gh_username}.md`, making corrections (and applying penalties) where necessary.
+3. Next, run `peer_review_md_to_html_compiler.py`, modifying the following configuration values in `config.json`:
+    * `assignment_prefix`
+    * `path_to_peer_review_src`
+    * `path_to_github_classroom_roster`
+4. Next, run `peer_review_sorter.py`, modifying the following configuration values in `config.json`:
+    * `assignment_prefix`
+    * `path_to_github_classroom_roster`
+    * `path_to_peer_review_src`
+    * `path_to_peer_review_dest`
+5. Next, inspect the directory bearing the Markdown files for distributions for anomalies.  E.g. students may have mispelt the name of a GitHub username while naming their Markdown files for peer reviews, leading to duplicate entries for the target recipient.  Make corrections where necessary, and apply penalties to the source of the peer review where needed.
+6. Next, if the recipient should not know the source of their peer reviews, run `peer_review_anonymizer.py`, modifying the following configuration values in `config.json`:
+    * `path_to_peer_review_dest`
+7. Next, zip each directory containing the peer reviews for each recipient, adapting `git_actions_runner.sh` where needed.
+8. Next, stage each recipient's ZIP file containing their peer reviews onto their Git repositories, adapting `git_actions_runner.sh` where needed.
+9. Finally, commit the changes and push to the remote repo for each recipient, adapting `git_actions_runner.sh` where needed.
+
+
 ## Configuration
 
 The Python scripts takes its configuration from `config.json`, which is included in `.gitignore`.
