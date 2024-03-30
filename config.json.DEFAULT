@@ -1,6 +1,7 @@
 {
     "github_api_key": "",
     "github_classroom_assignment_id": "",
+    "assignment_prefix": "",
     "path_to_github_classroom_roster": "",
     "peer_count": 1,
     "peer_assignment_interval": 1,
