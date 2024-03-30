@@ -14,8 +14,7 @@ from typing import List
 import csv
 import json
 
-import requests
-
+from utils import get_github_api_result_page
 import config_reader
 
 
@@ -35,22 +34,6 @@ def list_gh_classroom_accepted_assignments(assignment_id, api_key=None) -> List[
         page += 1
         json_response += raw_response
     return json_response
-
-
-def get_github_api_result_page(url, api_key=None, page=None, per_page=None) -> requests.Response:
-    headers = {}
-    if api_key:
-        headers["Authorization"] = f"Token {api_key}"
-    if type(page) == int and page > 1:
-        url = f"{url}?page={page}"
-    if type(per_page) == int and per_page > 1:
-        symbol = "&" if "?page=" in url else "?"
-        url = f"{url}{symbol}per_page={per_page}"
-    result = requests.get(url, headers=headers)
-    if result.status_code == 200:
-        return result
-    else:
-        raise Exception(f"Error: {result.status_code}")
 
 
 def map_gh_id_to_repo(accepted_assignments: List[dict], classroom_roster: dict) -> dict:

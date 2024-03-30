@@ -1,7 +1,10 @@
 {
     "github_api_key": "",
     "github_classroom_assignment_id": "",
-    "assignment_prefix": "",
+    "github_org": "",
+    "assignment_prefix": "assignment-1-",
+    "assignment_date_filter": "2024-",
+    "path_to_clone_assignment_repos": "",
     "path_to_github_classroom_roster": "",
     "peer_count": 1,
     "peer_assignment_interval": 1,
