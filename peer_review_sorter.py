@@ -12,36 +12,14 @@
 
 import csv
 import os
-import subprocess
 
-from utils import list_assignment_submissions
+from utils import list_assignment_submissions, move_file
 import config_reader
 
 # Run after compiling student peer review Markdown files into HTML, i.e. peer_review_md_to_html_compiler.py
 
 
 CONFIG = config_reader.load_config()
-
-
-def move_to_directory(src_path: str, dest_path: str) -> None:
-    create_directory_command = f"mkdir -p {'/'.join(dest_path.split("/")[:-1])}"
-    move_command = f"mv {src_path} {dest_path}"
-
-    subprocess.run(
-        create_directory_command,
-        shell=True,
-        check=True,
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL
-    )
-
-    subprocess.run(
-        move_command,
-        shell=True,
-        check=True,
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL
-    )
 
 
 if __name__ == "__main__":
@@ -71,5 +49,5 @@ if __name__ == "__main__":
                 src_gh_username = file.split("__")[0].split(".")[0]
                 dest_gh_username = file.split("__")[1].split(".")[0]
                 path_to_dest_file = f"{CONFIG['path_to_peer_review_dest']}/{dest_gh_username}/{src_gh_username}.html"
-                move_to_directory(path_to_src_file, path_to_dest_file)
+                move_file(path_to_src_file, path_to_dest_file)
     print("Moving directories done.")

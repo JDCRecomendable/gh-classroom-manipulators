@@ -7,6 +7,7 @@
 from typing import List
 import os
 import requests
+import subprocess
 
 
 def get_github_api_result_page(url, api_key=None, page=None, per_page=None) -> requests.Response:
@@ -32,3 +33,24 @@ def list_assignment_submissions(path_to_assignment_submissions: str, assignment_
         if str(assignment_submission).startswith(assignment_prefix):
             response.append(assignment_submission)
     return response
+
+
+def move_file(src_path: str, dest_path: str) -> None:
+    create_directory_command = f"mkdir -p {'/'.join(dest_path.split("/")[:-1])}"
+    move_command = f"mv {src_path} {dest_path}"
+
+    subprocess.run(
+        create_directory_command,
+        shell=True,
+        check=True,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL
+    )
+
+    subprocess.run(
+        move_command,
+        shell=True,
+        check=True,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL
+    )
