@@ -4,7 +4,8 @@
 
 # Copyright (c) 2023-2024 Jared Daniel Recomendable.
 
-
+from typing import List
+import os
 import requests
 
 
@@ -22,3 +23,12 @@ def get_github_api_result_page(url, api_key=None, page=None, per_page=None) -> r
         return result
     else:
         raise Exception(f"Error: {result.status_code}")
+
+
+def list_assignment_submissions(path_to_assignment_submissions: str, assignment_prefix: str) -> List[str]:
+    response = []
+    assignment_submissions = os.listdir(path_to_assignment_submissions)
+    for assignment_submission in assignment_submissions:
+        if str(assignment_submission).startswith(assignment_prefix):
+            response.append(assignment_submission)
+    return response

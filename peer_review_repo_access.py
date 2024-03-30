@@ -11,7 +11,6 @@
 # GNU General Public License for more details.
 
 from time import sleep
-from typing import List
 import json
 import os
 import sys

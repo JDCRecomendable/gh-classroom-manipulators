@@ -10,28 +10,19 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 
-from typing import List
 import csv
 import os
 import subprocess
 
 from pathos.multiprocessing import ProcessPool as Pool
 
+from utils import list_assignment_submissions
 import config_reader
 
 # Requires `pandoc` to be installed on the underlying system.
 
 
 CONFIG = config_reader.load_config()
-
-
-def list_assignment_submissions(path_to_assignment_submissions: str, assignment_prefix: str) -> List[str]:
-    response = []
-    assignment_submissions = os.listdir(path_to_assignment_submissions)
-    for assignment_submission in assignment_submissions:
-        if str(assignment_submission).startswith(assignment_prefix):
-            response.append(assignment_submission)
-    return response
 
 
 def compile_markdown_to_pdf(path_to_submission_file: str, assignment_prefix: str) -> None:
