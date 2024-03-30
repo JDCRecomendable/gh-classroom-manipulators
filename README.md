@@ -50,9 +50,19 @@ The number of peer reviewers per peer in peer assignments.
 
 For peer reviews, each student reviews every nth peer from its ordinal rank, where n is defined as the `peer_assignment_interval`.  In the case that the nth peer from the student's ordinal rank occurs after the end of the list, a wraparound occurs to the start of the list.
 
-### `path_to_student_repos`
+### `path_to_peer_review_src`
 
 Path to the directory containing subdirectories, where each subdirectory is a cloned repository from GitHub.
+
+Each cloned repository contains peer reviews written by the student assigned to that repository.
+
+Each peer review is written in a Markdown file.  The Markdown file may reference live media, such as GIFs and screencasts.  They need to be converted into self-contained HTML files for distribution to the target peers reviewed by the student.
+
+### `path_to_peer_review_dest`
+
+Path to the directory containing subdirectories, where each subdirectory contains HTML files.
+
+Each subdirectory is named after a student who has received a peer review from peers.
 
 ### `path_to_repo_mappings`
 
@@ -61,7 +71,3 @@ Path to the file mapping GitHub usernames to assignment repository URLs.
 ### `path_to_peer_review_mappings`
 
 Path to the file mapping a student to peers whom they will review.
-
-### `path_to_peer_review_directories`
-
-Path to the directory containing subdirectories, where each subdirectory contains Markdown files.  Each Markdown file, in turn, maps to a peer review.  Markdown files may reference media in the directory, and so need to be converted into HTML to be passed on to each student who was reviewed.

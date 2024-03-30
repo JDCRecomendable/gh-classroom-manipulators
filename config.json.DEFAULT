@@ -2,9 +2,10 @@
     "github_api_key": "",
     "github_classroom_assignment_id": "",
     "path_to_github_classroom_roster": "",
+    "peer_count": 1,
     "peer_assignment_interval": 1,
-    "path_to_student_repos": "",
+    "path_to_peer_review_src": "",
+    "path_to_peer_review_dest": "",
     "path_to_repo_mappings": "",
-    "path_to_peer_review_mappings": "",
-    "path_to_peer_review_directories": ""
+    "path_to_peer_review_mappings": ""
 }
