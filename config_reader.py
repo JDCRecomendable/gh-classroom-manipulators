@@ -18,6 +18,6 @@ def load_config() -> dict:
     with open("config.json.DEFAULT", "r") as default_config_file:
         with open("config.json", "r") as config_file:
             default_config = json.load(default_config_file)
-            custom_config = json.load(default_config_file)
+            custom_config = json.load(config_file)
             final_config = default_config | custom_config
     return final_config
